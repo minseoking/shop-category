@@ -1,39 +1,36 @@
 package com.ms.discovery.adapters.jpa.repository;
 
-import com.ms.discovery.adapters.jpa.entities.CategoryData;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import com.ms.discovery.domain.Category;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@DataJpaTest
 class CategoryRepositoryTest {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @BeforeEach
-    public void setUp() {
-        categoryRepository.deleteAll();
-    }
-
     @Test
-    @DisplayName("카테고리 생성 테스트")
-    public void insertCategoryTest() {
-        CategoryData categoryData = CategoryData.builder()
-            .build();
-        categoryData = categoryRepository.save(categoryData);
+    void findAllCategoryRepoTest() {
+        Category parent = Category.builder()
+                .name("부모")
+                .build();
+        Category savedParent = categoryRepository.save(parent);
+        Category child = Category.builder()
+                .name("자식")
+                .parent(savedParent)
+                .build();
+        Category savedChild = categoryRepository.save(child);
 
-        Optional<CategoryData> found = categoryRepository.findById(categoryData.getId());
+        List<Category> found = categoryRepository.findAll();
 
-        assertThat(found.isPresent()).isTrue();
+        assertThat(parent).isSameAs(savedParent);
+        assertThat(child).isSameAs(savedChild);
+        assertThat(found.size()).isEqualTo(1);
     }
 }

@@ -1,10 +1,8 @@
-package com.ms.discovery.adapters.jpa.services;
+package com.ms.discovery.adapters.rest.adapters;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class JPACategoryAdapterTest {
+class ApiCategoryAdapterTest {
 
     @Test
     void addCategory() {

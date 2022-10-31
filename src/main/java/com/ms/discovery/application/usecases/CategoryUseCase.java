@@ -5,9 +5,11 @@ import com.ms.discovery.domain.Category;
 import java.util.List;
 
 public interface CategoryUseCase {
-    int addCategory(Category category);
+    Integer addCategory(Category category);
 
-    void removeCategory(Category Category);
+    Integer updateCategory(Category category);
+
+    void removeCategory(Integer categoryId);
 
     List<Category> getCategories();
 

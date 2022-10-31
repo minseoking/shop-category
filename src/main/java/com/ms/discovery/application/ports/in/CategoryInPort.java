@@ -7,11 +7,13 @@ import com.ms.discovery.adapters.rest.dto.SaveCategoryDto;
 import java.util.List;
 
 public interface CategoryInPort {
-    int addCategory(SaveCategoryDto category);
+    Integer addCategory(SaveCategoryDto category);
 
-    int removeCategory(SaveCategoryDto Category);
+    void updateCategory(Integer categoryId, SaveCategoryDto category);
+
+    void removeCategory(Integer categoryId);
 
     List<CategoryDto> getCategories();
 
-    CategoryDto getCategoryById(Integer CategoryId);
+    CategoryDto getCategoryById(Integer categoryId);
 }
