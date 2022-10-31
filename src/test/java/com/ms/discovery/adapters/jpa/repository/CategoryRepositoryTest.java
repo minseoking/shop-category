@@ -18,11 +18,11 @@ class CategoryRepositoryTest {
     @Test
     void findAllCategoryRepoTest() {
         Category parent = Category.builder()
-                .name("부모")
+                .name("상위")
                 .build();
         Category savedParent = categoryRepository.save(parent);
         Category child = Category.builder()
-                .name("자식")
+                .name("하위")
                 .parent(savedParent)
                 .build();
         Category savedChild = categoryRepository.save(child);

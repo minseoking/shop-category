@@ -1,7 +1,10 @@
-package com.ms.discovery.adapters.jpa.adapters;
+package com.ms.discovery.application.services;
 
 import com.ms.discovery.adapters.jpa.repository.CategoryRepository;
-import com.ms.discovery.application.ports.out.CategoryOutPort;
+import com.ms.discovery.adapters.rest.dto.CategoryDto;
+import com.ms.discovery.adapters.rest.dto.SaveCategoryDto;
+import com.ms.discovery.application.ports.in.CategoryInPort;
+import com.ms.discovery.application.usecases.CategoryUseCase;
 import com.ms.discovery.domain.Category;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +16,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class CategoryRepositoryAdapterTest {
+class CategoryServiceTest {
 
     @Autowired
-    private CategoryOutPort categoryOutPort;
+    private CategoryUseCase categoryUseCase;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -27,12 +30,12 @@ class CategoryRepositoryAdapterTest {
     }
 
     @Test
-    void addCategoryRepoAdapterTest() {
+    void addCategoryServiceTest() {
         Category category = Category.builder()
                 .name("상위")
                 .build();
 
-        Integer categoryId = categoryOutPort.addCategory(category);
+        Integer categoryId = categoryUseCase.addCategory(category);
         Category saveCategory = categoryRepository.findById(categoryId).orElse(null);
 
         assertThat(saveCategory).isNotNull();
@@ -41,18 +44,18 @@ class CategoryRepositoryAdapterTest {
     }
 
     @Test
-    void updateCategoryRepoAdapterTest() {
+    void updateCategoryServiceTest() {
         String changeName = "하위";
         Category category = Category.builder()
                 .name("상위")
                 .build();
-        Integer categoryId = categoryOutPort.addCategory(category);
+        Integer categoryId = categoryUseCase.addCategory(category);
         Category updateCategory = Category.builder()
                 .id(categoryId)
                 .name(changeName)
                 .build();
 
-        categoryOutPort.updateCategory(updateCategory);
+        categoryUseCase.updateCategory(updateCategory);
         Category saveCategory = categoryRepository.findById(categoryId).orElse(null);
 
         assertThat(saveCategory).isNotNull();
@@ -61,12 +64,12 @@ class CategoryRepositoryAdapterTest {
     }
 
     @Test
-    void deleteCategoryRepoAdapterTest() {
+    void deleteCategoryServiceTest() {
         Category category = Category.builder()
                 .name("상위")
                 .build();
-        Integer categoryId = categoryOutPort.addCategory(category);
-        categoryOutPort.removeCategory(categoryId);
+        Integer categoryId = categoryUseCase.addCategory(category);
+        categoryUseCase.removeCategory(categoryId);
 
         Category saveCategory = categoryRepository.findById(categoryId).orElse(null);
 
@@ -74,13 +77,13 @@ class CategoryRepositoryAdapterTest {
     }
 
     @Test
-    void getCategoryRepoAdapterTest() {
+    void getCategoryServiceTest() {
         Category category = Category.builder()
                 .name("상위")
                 .build();
-        Integer categoryId = categoryOutPort.addCategory(category);
+        Integer categoryId = categoryUseCase.addCategory(category);
 
-        Category saveCategory = categoryOutPort.getCategoryById(categoryId);
+        Category saveCategory = categoryUseCase.getCategoryById(categoryId);
 
         assertThat(saveCategory).isNotNull();
         assertThat(categoryId).isEqualTo(saveCategory.getId());
@@ -88,13 +91,13 @@ class CategoryRepositoryAdapterTest {
     }
 
     @Test
-    void getAllCategoryRepoAdapterTest() {
+    void getAllCategoryServiceTest() {
         Category category = Category.builder()
                 .name("상위")
                 .build();
-        categoryOutPort.addCategory(category);
+        categoryUseCase.addCategory(category);
 
-        List<Category> categories = categoryOutPort.getCategories();
+        List<Category> categories = categoryUseCase.getCategories();
 
         assertThat(categories.size()).isEqualTo(1);
     }

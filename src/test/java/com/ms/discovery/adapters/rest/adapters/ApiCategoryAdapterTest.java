@@ -33,7 +33,7 @@ class ApiCategoryAdapterTest {
     @Test
     void addCategoryApiAdapterTest() {
         SaveCategoryDto category = SaveCategoryDto.builder()
-                .name("부모")
+                .name("상위")
                 .build();
 
         Integer categoryId = categoryInPort.addCategory(category);
@@ -46,9 +46,9 @@ class ApiCategoryAdapterTest {
 
     @Test
     void updateCategoryApiAdapterTest() {
-        String changeName = "자식";
+        String changeName = "하위";
         SaveCategoryDto category = SaveCategoryDto.builder()
-                .name("부모")
+                .name("상위")
                 .build();
         Integer categoryId = categoryInPort.addCategory(category);
         SaveCategoryDto updateCategory = SaveCategoryDto.builder()
@@ -66,7 +66,7 @@ class ApiCategoryAdapterTest {
     @Test
     void deleteCategoryApiAdapterTest() {
         SaveCategoryDto category = SaveCategoryDto.builder()
-                .name("부모")
+                .name("상위")
                 .build();
         Integer categoryId = categoryInPort.addCategory(category);
         categoryInPort.removeCategory(categoryId);
@@ -79,7 +79,7 @@ class ApiCategoryAdapterTest {
     @Test
     void getCategoryApiAdapterTest() {
         SaveCategoryDto category = SaveCategoryDto.builder()
-                .name("부모")
+                .name("상위")
                 .build();
         Integer categoryId = categoryInPort.addCategory(category);
 
@@ -93,7 +93,7 @@ class ApiCategoryAdapterTest {
     @Test
     void getAllCategoryApiAdapterTest() {
         SaveCategoryDto category = SaveCategoryDto.builder()
-                .name("부모")
+                .name("상위")
                 .build();
         categoryInPort.addCategory(category);
 
