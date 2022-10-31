@@ -21,6 +21,6 @@ class CategoryDtoMapperTest {
         Category category = CategoryDtoMapper.toEntity(saveCategoryDto);
 
         assertThat(saveCategoryDto.getName()).isEqualTo(category.getName());
-//        assertThat(saveCategoryDto.getParentId()).isEqualTo(category.getParent().getId());
+        assertThat(saveCategoryDto.getParentId()).isEqualTo(category.getParent().getId());
     }
 }

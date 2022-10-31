@@ -27,6 +27,7 @@ public class Category {
 
     @Builder
     public Category(Integer id, String name, Category parent) {
+        this.id = id;
         this.name = name;
         this.parent = parent;
     }
