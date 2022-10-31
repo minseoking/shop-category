@@ -1,9 +1,6 @@
 package com.ms.discovery.application.services;
 
 import com.ms.discovery.adapters.jpa.repository.CategoryRepository;
-import com.ms.discovery.adapters.rest.dto.CategoryDto;
-import com.ms.discovery.adapters.rest.dto.SaveCategoryDto;
-import com.ms.discovery.application.ports.in.CategoryInPort;
 import com.ms.discovery.application.usecases.CategoryUseCase;
 import com.ms.discovery.domain.Category;
 import org.junit.jupiter.api.BeforeEach;
