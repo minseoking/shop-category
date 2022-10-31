@@ -1,7 +1,6 @@
 package com.ms.discovery.adapters.rest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ms.discovery.adapters.jpa.repository.CategoryRepository;
 import com.ms.discovery.adapters.rest.dto.SaveCategoryDto;
 import com.ms.discovery.application.ports.in.CategoryInPort;
 import org.junit.jupiter.api.Test;
