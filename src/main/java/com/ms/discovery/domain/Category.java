@@ -30,7 +30,6 @@ public class Category {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
-    @Fetch(FetchMode.SUBSELECT)
     private List<Category> children = new ArrayList<>();
 
     @Builder

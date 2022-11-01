@@ -46,18 +46,19 @@ class CategoryRepositoryAdapterTest {
         Category category = Category.builder()
                 .name("상위")
                 .build();
-        Integer categoryId = categoryOutPort.addCategory(category);
-        Category updateCategory = Category.builder()
-                .id(categoryId)
-                .name(changeName)
-                .build();
 
-        categoryOutPort.updateCategory(updateCategory);
-        Category saveCategory = categoryRepository.findById(categoryId).orElse(null);
+        Integer categoryId = categoryOutPort.addCategory(category);
+        Category saveCategory = categoryRepository.findById(categoryId)
+                .orElse(Category.builder().build());
+        saveCategory.updateCategory(changeName, null);
+
+        categoryOutPort.updateCategory(saveCategory);
+        Category savedCategory = categoryRepository.findById(categoryId).orElse(null);
 
         assertThat(saveCategory).isNotNull();
+        assertThat(savedCategory).isNotNull();
         assertThat(categoryId).isEqualTo(saveCategory.getId());
-        assertThat(updateCategory.getName()).isEqualTo(saveCategory.getName());
+        assertThat(savedCategory.getName()).isEqualTo(saveCategory.getName());
     }
 
     @Test
