@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional
 class CategoryServiceTest {
 
     @Autowired
@@ -52,7 +54,7 @@ class CategoryServiceTest {
                 .name(changeName)
                 .build();
 
-        categoryUseCase.updateCategory(updateCategory);
+        categoryUseCase.updateCategory(categoryId, updateCategory);
         Category saveCategory = categoryRepository.findById(categoryId).orElse(null);
 
         assertThat(saveCategory).isNotNull();

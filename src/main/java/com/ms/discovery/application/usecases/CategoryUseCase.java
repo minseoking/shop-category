@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoryUseCase {
     Integer addCategory(Category category);
 
-    Integer updateCategory(Category category);
+    Integer updateCategory(Integer categoryId, Category category);
 
     void removeCategory(Integer categoryId);
 

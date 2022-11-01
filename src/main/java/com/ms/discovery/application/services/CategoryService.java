@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -19,19 +20,24 @@ public class CategoryService implements CategoryUseCase {
     @Transactional
     public Integer addCategory(Category category) {
         if (category.getParent() != null) {
-            Category parent =  categoryOutPort.getCategoryById(category.getParent().getId());
-            category = Category.builder()
-                .name(category.getName())
-                .parent(parent)
-                .build();
+            Category parent = categoryOutPort.getCategoryById(category.getParent().getId());
+            verifyCategory(category);
+
+            category.updateCategory(category.getName(), parent);
         }
+
         return categoryOutPort.addCategory(category);
     }
 
     @Override
     @Transactional
-    public Integer updateCategory(Category category) {
-        return categoryOutPort.updateCategory(category);
+    public Integer updateCategory(Integer categoryId, Category category) {
+        Category foundCategory = categoryOutPort.getCategoryById(categoryId);
+        verifyCategory(category);
+
+        foundCategory.updateCategory(category.getName(), category.getParent());
+
+        return categoryOutPort.updateCategory(foundCategory);
     }
 
     @Override
@@ -41,14 +47,23 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Category> getCategories() {
         return categoryOutPort.getCategories();
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public Category getCategoryById(Integer categoryId) {
-        return categoryOutPort.getCategoryById(categoryId);
+        Category category = categoryOutPort.getCategoryById(categoryId);
+        verifyCategory(category);
+
+        return category;
+    }
+
+    private void verifyCategory(Category category) {
+        if (category == null) {
+            throw new NoSuchElementException();
+        }
     }
 }

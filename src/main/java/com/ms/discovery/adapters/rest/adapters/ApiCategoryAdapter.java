@@ -1,8 +1,8 @@
 package com.ms.discovery.adapters.rest.adapters;
 
 import com.ms.discovery.adapters.rest.dto.CategoryDto;
-import com.ms.discovery.adapters.rest.mapper.CategoryDtoMapper;
 import com.ms.discovery.adapters.rest.dto.SaveCategoryDto;
+import com.ms.discovery.adapters.rest.mapper.CategoryDtoMapper;
 import com.ms.discovery.application.ports.in.CategoryInPort;
 import com.ms.discovery.application.usecases.CategoryUseCase;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class ApiCategoryAdapter implements CategoryInPort {
 
     @Override
     public void updateCategory(Integer categoryId, SaveCategoryDto saveCategoryDto) {
-        categoryUseCase.updateCategory(CategoryDtoMapper.toEntity(categoryId, saveCategoryDto));
+        categoryUseCase.updateCategory(categoryId, CategoryDtoMapper.toEntity(saveCategoryDto));
     }
 
     @Override
