@@ -31,6 +31,5 @@ class CategoryRepositoryTest {
 
         assertThat(parent).isSameAs(savedParent);
         assertThat(child).isSameAs(savedChild);
-        assertThat(found.size()).isEqualTo(1);
     }
 }

@@ -3,6 +3,7 @@ package com.ms.discovery.application.services;
 import com.ms.discovery.adapters.jpa.repository.CategoryRepository;
 import com.ms.discovery.application.usecases.CategoryUseCase;
 import com.ms.discovery.domain.Category;
+import org.hibernate.Hibernate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Transactional
+//@Transactional
 class CategoryServiceTest {
 
     @Autowired
@@ -99,5 +100,26 @@ class CategoryServiceTest {
         List<Category> categories = categoryUseCase.getCategories();
 
         assertThat(categories.size()).isEqualTo(1);
+    }
+
+    @Test
+    void getAllN1CategoryServiceTest() {
+        for (int i = 0; i < 10; i++) {
+            Category parent = Category.builder()
+                    .name("parent" + i)
+                    .build();
+            parent = categoryRepository.save(parent);
+
+            Category child = Category.builder()
+                    .name("child" + i)
+                    .parent(parent)
+                    .build();
+
+            categoryRepository.save(child);
+        }
+
+        List<Category> categories = categoryUseCase.getCategories();
+
+        assertThat(Hibernate.isInitialized(categories.size())).isTrue();
     }
 }

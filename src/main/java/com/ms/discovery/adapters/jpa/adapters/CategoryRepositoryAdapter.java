@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -33,7 +34,9 @@ public class CategoryRepositoryAdapter implements CategoryOutPort {
 
     @Override
     public List<Category> getCategories() {
-        return categoryRepository.findAll();
+        return categoryRepository.findAll().stream()
+                .filter(x -> x.getParent() == null)
+                .collect(Collectors.toList());
     }
 
     @Override
