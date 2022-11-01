@@ -1,4 +1,4 @@
-# 온라인 카테고리 CRUD API
+# 온라인 쇼핑몰 카테고리 CRUD API
 
 
 ## 리눅스 실행 방법
@@ -17,11 +17,11 @@ sudo systemctl status docker # docker 상태 확인
 
 ### 3. Docker 이미지 Pull
 ```
-sudo docker pull minseoklee98/shop-mission
+sudo docker pull minseoklee98/shop-mission:0.0.1
 ```
 ### 4. Docker 실행
 ```
-sudo docker run -p 8080:8080 minseoklee98/shop-mission
+sudo docker run minseoklee98/shop-mission:0.0.1
 ```
 ### 5. api 실행 확인
 ```
