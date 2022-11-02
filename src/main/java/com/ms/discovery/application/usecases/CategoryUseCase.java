@@ -11,7 +11,7 @@ public interface CategoryUseCase {
 
     void removeCategory(Integer categoryId);
 
-    List<Category> getCategories();
+    List<Category> getAllCategories();
 
     Category getCategoryById(Integer CategoryId);
 }

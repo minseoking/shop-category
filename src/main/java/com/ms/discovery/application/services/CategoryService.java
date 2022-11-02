@@ -48,7 +48,7 @@ public class CategoryService implements CategoryUseCase {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Category> getCategories() {
+    public List<Category> getAllCategories() {
         return categoryOutPort.getCategories();
     }
 

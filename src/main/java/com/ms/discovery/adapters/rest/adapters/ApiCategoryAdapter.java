@@ -34,7 +34,7 @@ public class ApiCategoryAdapter implements CategoryInPort {
 
     @Override
     public List<CategoryDto> getCategories() {
-        return categoryUseCase.getCategories().stream().map(CategoryDto::of).collect(Collectors.toList());
+        return categoryUseCase.getAllCategories().stream().map(CategoryDto::of).collect(Collectors.toList());
     }
 
     @Override

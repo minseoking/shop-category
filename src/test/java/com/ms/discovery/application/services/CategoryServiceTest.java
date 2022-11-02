@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -97,7 +96,7 @@ class CategoryServiceTest {
                 .build();
         categoryUseCase.addCategory(category);
 
-        List<Category> categories = categoryUseCase.getCategories();
+        List<Category> categories = categoryUseCase.getAllCategories();
 
         assertThat(categories.size()).isEqualTo(1);
     }
@@ -118,7 +117,7 @@ class CategoryServiceTest {
             categoryRepository.save(child);
         }
 
-        List<Category> categories = categoryUseCase.getCategories();
+        List<Category> categories = categoryUseCase.getAllCategories();
 
         assertThat(Hibernate.isInitialized(categories.size())).isTrue();
     }
