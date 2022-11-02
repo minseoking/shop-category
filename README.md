@@ -21,7 +21,7 @@ sudo docker pull minseoklee98/shop-mission:0.0.1
 ```
 ### 4. Docker 실행
 ```
-sudo docker run minseoklee98/shop-mission:0.0.1
+sudo docker run -d -p 8080:8080 minseoklee98/shop-mission:0.0.1
 ```
 ### 5. api 실행 확인
 ```
