@@ -21,7 +21,7 @@ public class CategoryService implements CategoryUseCase {
     public Integer addCategory(Category category) {
         if (category.getParent() != null) {
             Category parent = categoryOutPort.getCategoryById(category.getParent().getId());
-            verifyCategory(category);
+            verifyCategory(parent);
 
             category.updateCategory(category.getName(), parent);
         }
