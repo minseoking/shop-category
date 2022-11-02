@@ -41,6 +41,9 @@ public class CategoryRepositoryAdapter implements CategoryOutPort {
 
     @Override
     public Category getCategoryById(Integer categoryId) {
-        return categoryRepository.findById(categoryId).orElse(null);
+        return categoryRepository.findAll().stream()
+                .filter(x->x.getId().equals(categoryId))
+                .findFirst()
+                .orElse(null);
     }
 }
